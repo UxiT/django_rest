@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from users.serializers import UserDetailSerializer, UserListSerializer
+from users.serializers import UserDetailSerializer
 from users.models import ModelUser
 import rest_framework as rest
 
@@ -16,8 +16,14 @@ class UserCreateView(generics.CreateAPIView):
     serializer_class = UserDetailSerializer
 
 
+class UserView(generics.ListAPIView):
+    serializer_class = UserDetailSerializer
+    queryset = "__all__"
+    # lookup_field = "pk"
+
+
 class UserListView(generics.ListAPIView):
-    serializer_class = UserListSerializer
+    serializer_class = UserDetailSerializer
     queryset = ModelUser.objects.all()
     pagination_class = UserPagination
 
