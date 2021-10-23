@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.serializers import UserDetailSerializer
 from users.models import ModelUser
+from users.permissions import IsOwnerReadOnly
 import rest_framework as rest
 
 
@@ -26,6 +27,7 @@ class UserListView(generics.ListAPIView):
 class UserEdit(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserDetailSerializer
     queryset = "__all__"
+    permission_classes = (IsOwnerReadOnly, )
 
 
 @api_view(["GET"])
