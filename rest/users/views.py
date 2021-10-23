@@ -3,9 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.serializers import UserDetailSerializer
 from users.models import ModelUser
-from users.permissions import IsOwnerReadOnly
 import rest_framework as rest
-
 
 
 # Create your views here.
@@ -18,6 +16,7 @@ class UserPagination(rest.pagination.PageNumberPagination):
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserDetailSerializer
 
+
 class UserListView(generics.ListAPIView):
     serializer_class = UserDetailSerializer
     queryset = ModelUser.objects.all()
@@ -26,8 +25,7 @@ class UserListView(generics.ListAPIView):
 
 class UserEdit(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserDetailSerializer
-    queryset = "__all__"
-    permission_classes = (IsOwnerReadOnly, )
+    queryset = ModelUser.objects.all()
 
 
 @api_view(["GET"])
