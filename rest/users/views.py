@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.serializers import UserDetailSerializer
 from users.models import ModelUser
+from users.permissions import IsOwnerReadOnly
 import rest_framework as rest
 
 
