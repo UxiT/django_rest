@@ -8,7 +8,12 @@ from core.models import MyUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
-        fields = ('username',)
+        fields = ("username", "id")
+
+class UserEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = ("username", "first_name", "last_name", "profile_img", "country", "city", "status")
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
